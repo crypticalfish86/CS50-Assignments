@@ -1,0 +1,1 @@
+This repository is designed to store all code and notes i make during the CS50 course at havard.
