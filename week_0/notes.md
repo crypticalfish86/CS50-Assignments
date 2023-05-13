@@ -55,3 +55,31 @@ the same way in decimal the number 1250 can be broken down into:
 a byte is made up of 8 bits : 11111111
 1 byte can count up to 255 as it goes up in base 2 up to the 128th base of 2 (which when all swiches are turned on it goes up to 256 or 255 in machine language because 0 is the first digit)
 
+
+REPRESENTATION
+
+At the end of the day a computer simply has a ton of microscopic transistors and switches, so how would a computer represent values other than 0 and 1 (e.g the letter "A")
+
+if the 0's and ones described above are used to represent numbers how would you go about representing letters of the alphabet?
+
+if the letter A is represented just by 0, then how would the actual number 0 be represented? the computer would not recognise the difference at the end of the day.
+
+the alphabet therefore can be represented using ASCII, where each computer has a built in reference for when ASCII is being used and represents that value with a number (with capital A being the number 65).
+
+Every Character in ASCII is represented by 8 bits (1 byte) A in decimal is 65 but in binary it looks like 01000001. A second part of the computer interprets this 65 to the ASCII character A.
+
+paradoxically the character (string number "1") number one can be stored in ASCII as the number 49
+(11001) so when we write 1 as a string and not as a number/integer it has the actual value in bits of 49.
+
+The patterns of numbers of 0s and 1s they will be automatically interpreted as character strings converted into ASCII
+
+
+
+In things like visual graphics, the colours are NOT represented in ASCII but instead are reperesented by something called a HEXIDECIMAL CODE
+
+ASCII as its made up of 1 byte can represent only up to 256 variations of characters, as there are more than 256 variations of colours or if you want more than 256 characters represented (e.g. non latin alphabet characters or emojis) you would instead use something called UNICODE which is the representation of up to 24-32 bits (roughly 3-4 bytes) which is more than enough to represent 4 billion characters, more than enough space for every possible iteration of character. these 4 billion possible iterations give us extra space to let us represent emojis.
+
+Every pixel on a computer screen is represented through an interpreter of bits called RGB where there is 1 byte for red, 1 byte for green and 1 byte for blue. there are 256 iterations of each colour and so each code has a very specific variation of red green and blue to represent different potential colours like orange, purple, yellow etc. e.g. if the bytes which represent the numbers 72, 73, 33 were interpreted by a computer as RGB then it would instead look like a murky yellow. This is how pixels are represented under the hood on a screen (this is why images take up so much memory because each individual pixel has a code to them and videos are even larger in size for the same reasons + iterations and changes to pixels that change over time)
+
+There are similar interpreters for all sorts of things (like Hz interpreted as bits for music, game engine graphics, 3d graphs etc. etc.)
+
