@@ -8,6 +8,8 @@ An array is a data structure that stores information in a large chunk of memory 
 
 Frameworks and libraries are third party code that others have produced in the same language as you and is used to simplify or automate certain processes in your program.
 
+
+
 BINARY
 
 Computer science itself is essnetially the "study of information". Computational thinking is the application of that study by computers.
@@ -51,9 +53,10 @@ the same way in decimal the number 1250 can be broken down into:
 (1 * 1000) + (2 * 100) + (5 * 10) + (0 * 1)
 
 
-
 a byte is made up of 8 bits : 11111111
 1 byte can count up to 255 as it goes up in base 2 up to the 128th base of 2 (which when all swiches are turned on it goes up to 256 or 255 in machine language because 0 is the first digit)
+
+
 
 
 REPRESENTATION
@@ -83,3 +86,8 @@ Every pixel on a computer screen is represented through an interpreter of bits c
 
 There are similar interpreters for all sorts of things (like Hz interpreted as bits for music, game engine graphics, 3d graphs etc. etc.)
 
+
+
+ABSTRACTION AND ALGORITHMS
+
+An algorithm in the most simple terms is the step by step process used to turn an input into a specific output, an abstraction is a referral to the algorithm in general used to turn an input into an output without going into details about how the process is working.
