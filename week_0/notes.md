@@ -91,3 +91,28 @@ There are similar interpreters for all sorts of things (like Hz interpreted as b
 ABSTRACTION AND ALGORITHMS
 
 An algorithm in the most simple terms is the step by step process used to turn an input into a specific output, an abstraction is a referral to the algorithm in general used to turn an input into an output without going into details about how the process is working.
+
+The beggining of planning out an algorithm tends to be done by writing "pseudocode" essentially instructions in plain english used to break down the steps of a problem making it easier to understand the step by step process the developer would have to take.
+
+ALGORITHM EXAMPLE (SEARCH THROUGH DATABASE)
+
+Hypothetically a search algorithm through a large database doesn't neccessarily have to sort through all of the database until it matches but instead can begin in the middle of the database, determine from data in the middle where the answer would be sorted, then go to the middle of that half of the database, figure out which side of the database it is on that side and continue that process continuously until it reaches the correct data, this is much faster computationally than simply trying to search the entire database.
+
+pseudocode for this problem:
+
+1. Pick up phone book
+2. Open to middle of phone book
+3. Look at page
+4. If person is on page
+    5. Call person
+6. Else if person is ealier in book
+    7. Open to middle of left half of book
+    8. go back to step 3
+9. Else if Person is later in book
+    10. Open to middle of right half of book
+    11. go back to step 3
+12. Else
+    13. Quit
+
+All of the verbs in this scenario (like pick up, open, look at, call, go back) should be your functions. All the ifs and else's should be our conditionals that rely on boolean expressions.
+
