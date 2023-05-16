@@ -116,3 +116,8 @@ pseudocode for this problem:
 
 All of the verbs in this scenario (like pick up, open, look at, call, go back) should be your functions. All the ifs and else's should be our conditionals that rely on boolean expressions.
 
+SCRATCH
+
+scratch is a graphical programming language designed for the very basics of programming, where you drag and drop operators and functions that only let you do those things if they make logical sense. 
+
+It is the most basic programming language generally taught to pupils in school. It has no strange syntax like {} curly braces.
