@@ -132,6 +132,21 @@ function add(numberToAdd)
 
 number was not a parameter but it nonetheless was modified as a side effect of the function "add".
 
+FUNCTIONAL PROGRAMMING
+
+Simply writing free flowing code without any specific structure is called "procedural programming", it is fast and you get features out fast a lot but it is not ideal as it can get extremely messy,
+this is where "functional programming" comes in, What functional programming essentially is is wrapping and defining all functionality into 
+functions and then executing the entire program inside a "main" function that only contains other functions. This is ideal for more complex programs 
+and allows you to create individual function "components" without you needing to worry about what is inside each function apart from what your 
+function is actually doing in the abstract.
+
+
+CONTINIOUS LOOPS
+
+when creating interactive programs e.g. video games, you want to ensure your program is continously checking for specific user inputs.
+Therefore its a good idea to wrap your entire program inside a while loop until some interaction by the user breaks that loop. The clock in your
+phone for example is in a continous loop forever as you want it to always tell the time.
+
 SCRATCH
 
 scratch is a graphical programming language designed for the very basics of programming, where you drag and drop operators and functions that only let you do those things if they make logical sense. 
