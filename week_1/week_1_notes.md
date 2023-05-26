@@ -7,4 +7,5 @@ Instead machines can only understand "machine code" (0s and 1s which represent o
 Source code = human written code
 machine code = machine understood code
 
-In order to convert a machine must
+In order to convert a machine must "compile" the code which is an under the hood algorithm that converts source code into machine code. We don't need to know the intracacies of how this works we just need to know that it is happening.
+
