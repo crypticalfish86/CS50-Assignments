@@ -9,3 +9,68 @@ machine code = machine understood code
 
 In order to convert a machine must "compile" the code which is an under the hood algorithm that converts source code into machine code. We don't need to know the intracacies of how this works we just need to know that it is happening.
 
+
+running C programs
+
+for CS50 online cloud services purposes here is how you will create a C file using the terminal
+
+code hello.c
+ //creates the file in vsCode to input C into
+
+make hello
+//computer recognises file as a program to be run
+
+./hello
+//run the program
+
+this will actually create another .exe file, thats the actual program the computer has comipiled into machine language which is binary for the server to recognise and use (it should be unreadable to a human).
+
+Basics in C
+
+in order to print something in C you do
+
+printf("hello, world!\n");
+
+printf is the function
+"hello, world" is the string
+\n inside the quotations is the "escape sequence" which allows you to print a new line
+the ";" is the end of the "statement" a statement is essentially the end of a particular line of code. (not always needed, you will learn in time which ones need it and which ones don't)
+
+
+what tends to happen in C is this
+
+1. The human writes the code
+2. The human inputs the command in the terminal to compile the code
+3. the computer compiles the code into machine language
+4. the human inputs the comman in the terminal to run the actual program (the machine code)
+5. the computer runs the program
+
+The compiler will detect errors in your code when you attempt to compile it, if errors are detected 
+the compiler ceases the conversion into machine language and notifies the user of the error for them to correct.
+
+
+note this line of code that generally appears at the beggining of programs:
+
+#include <stdio.h>
+
+this is the importation of a "library" which is essentially a piece of pregenerated code from 
+elsewhere (that someone else wrote) with useful functions for you to use in your program. 
+There are many libraries out there for you to use.
+If you want to use the functions in the library it MUST be included at the top of the program.
+
+<stdio.h> stands for (standard input and output)
+
+Libraries tend to have documentation, some easier to read than others, you may need to be an experienced programmer to understand some documents.
+
+CS50 has libraries you will use throughout this course,
+
+e.g.
+string answer = get_string("Whats, your name? ");
+
+this functions awaits a user input and returns the input as a string to the variable "answer".
+
+you can then plug in the answer into a printf function by doing the following:
+
+printf("%s", answer);
+
+%s is treated as a "plugin value", the plugin being the variable thats included as the second argument in printf.
