@@ -74,3 +74,76 @@ you can then plug in the answer into a printf function by doing the following:
 printf("%s", answer);
 
 %s is treated as a "plugin value", the plugin being the variable thats included as the second argument in printf.
+
+you can chain as many %s's and variables as you want e.g.
+
+printf("%s %s", firstName, lastName)
+
+the first %s will be the first name and second will be the last name
+
+if you want an actual % sign in a string you have to "escape" the % using 2 %'s like so: 
+
+printf("100%%") this will print as "100%"
+
+there tends to be a space after an if but not after a function:
+
+data_type main(parameter)
+{
+
+}
+
+if (condition)
+
+this is not a rule its just a general consensus.
+
+expressing equality in C is done using ==
+assignment is done with one =
+
+REMEMBER IN C YOU MUST ALWAYS DECLARE THE VARIABLE TYPE
+
+REMEMBER TO ALWAYS RECOMPILE C CODE AFTER MAKING CHANGES OTHERWISE THE ACTUAL MACHINE CODE WOULD NOT HAVE BEEN UPDATED 
+
+DONT FORGET CHARs REQUIRE SINGLE QUOTES '', strings require double quotes ""
+
+conditionals:
+
+&& and
+|| or
+!= not equals
+>greater than
+< less than
+
+returns a boolean true or false value (in c its 1 or 0)
+
+
+When declaring an existing variable you don't need to include the datatype.
+
+loops
+
+while(condition)
+{
+    code;
+}
+
+will continuously execute the code on a loop until
+condition == false
+
+for(variable_declaration; condition; variable_modification)
+{
+    code;
+}
+
+a for loop first allows you to declare a variable e.g. int i = 0; (this only executes once at the beggining of the first loop)
+then checks the condition of that variable and if it passes then runs one loop of the code, 
+then finally executes the variable modification before checking the condition again and continues to run
+the loop until the condition == false (or 0 in C)
+
+
+if you want a program to execute forever without an exit condition you can use a while loop:
+
+while(true)
+{
+    code;
+}
+
+this will eventually take up all your computers rescources so be careful with it
