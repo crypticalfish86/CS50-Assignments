@@ -147,3 +147,52 @@ while(true)
 }
 
 this will eventually take up all your computers rescources so be careful with it
+
+C has const like javascript like so:
+
+const int i = 9;
+
+i can now never be modified
+
+
+ABSTRACTION
+
+C has hoisting however its less automatic than javascript all you have to do is declare the functions initially on top and then 
+write the actual code below (look to the mario.c example)
+
+TRUNCATION
+
+computers sometimes suffer from a problem called "truncation" where computers lose parts of a data value
+e.g. losing everything after the decimal point when dividing by an int
+
+int x = 5;
+int y = 2;
+int z = x / y;
+printf("%i", z)
+
+answer should be 2.5 however instead prints 2 losing everything after the decimal point as they're integers
+
+TYPE CASTING
+
+we can prevent truncation by converting one datatype to another value, you must explicitly tell the compiler this.
+
+this is done like so:
+
+int x = 5;
+int y = 2;
+
+float z = (float) x / (float) y;
+
+here x and y are initially integers however they
+are converted to floats
+
+
+FLOATING POINT IMPRECISION
+
+just as there is an upper bound on integers, there is an upper bound on how precise floats can be.
+
+if you only have a finite amount of bits you can only have a certain amount of precision, floats are only precise up to 5 decimal places
+
+doubles are precise to 15 decimal places.
+
+floats are 32 bit variables while double is 64 bit variables.
