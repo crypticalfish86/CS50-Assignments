@@ -158,7 +158,7 @@ i can now never be modified
 ABSTRACTION
 
 C has hoisting however its less automatic than javascript all you have to do is declare the functions initially on top and then 
-write the actual code below (look to the mario.c example)
+write the actual code below
 
 TRUNCATION
 
