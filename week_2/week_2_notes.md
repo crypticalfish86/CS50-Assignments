@@ -5,8 +5,6 @@ is using the "make" command, however "make" itself
 is not actually a compiler. all it does is automate
 the process that actually runs a compiler.
 
-COMPILERS FOR C
-
 there are two main compilers for C, one is called
 GCC one is called clang.
 
@@ -42,4 +40,35 @@ we will only need to use clang in your cs50 course
 for specific circumstances, make will still be used
 for now but in the real world you will use the 
 other method
+
+in compiling there are actually 4 steps:
+
+1. preprocessing
+2. compiling
+3. assembling
+4. linking
+
+preprocessing:
+    when you install C there is a hidden file on 
+    your hard drive that stores all the standard
+    C libraries e.g. <stdio.h> this contains
+    the assembly language required to interpret
+    the functions in those libraries (this is 
+    where we would store third party libraries
+    like cs50 too)
+    so preprocessing looks for any line that begins
+    with "#" and go retrive that file on your hard
+    drive
+
+compiling:
+    once a program has been pre processed, it now
+    looks only into main (as everything outside
+    of main has been interpreted), now what it does
+    is actually convert your source code in C into
+    "assembly code" (NOT 0s and 1s, assembly can
+    still be interpreted by a human it just looks
+    extremely hard to read)
+
+assembling:
+    this is where the assembly code that was created
 
