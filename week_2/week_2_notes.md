@@ -59,6 +59,10 @@ preprocessing:
     so preprocessing looks for any line that begins
     with "#" and go retrive that file on your hard
     drive
+    
+    In preprocessing, this is also where function
+    declarations involved in "hoisting" are also
+    processed and ready for use in main
 
 compiling:
     once a program has been pre processed, it now
@@ -70,5 +74,16 @@ compiling:
     extremely hard to read)
 
 assembling:
-    this is where the assembly code that was created
+    this is where the assembly code that was created and turns it into machine code 
+    (binary), these wont be all the 0s and 1s of
+    your program though, this is fixed in the
+    next step
+
+linking:
+    now we combine the 0s and 1s of your source
+    code with the 0s and 1s of your hard drive
+    as well as any of the libraries you use, and 
+    combines all the 0s and 1s together to create
+    your program, the computer then executes the 
+    program.
 
