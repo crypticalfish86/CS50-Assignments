@@ -87,3 +87,44 @@ linking:
     your program, the computer then executes the 
     program.
 
+DEBUGGING
+
+to debug at the start just use printf to print out
+your variables in code and see where exactly in
+code its going wrong.
+
+computer scientists however tend to use something
+called a "debugger", 
+
+in cs50 we have a debugger first we hit the red 
+"stop" which is initially unhilighted but visible
+when mousing over to the left of the line number
+in vs code, that is the line you're telling the
+debugger to stop the code at and start running
+through in human time (slowly)
+
+you then do the following:
+
+1. debug50 ./"file_name"
+2. the debugger will then execute and highlight 
+the relevant line as well as any and all local
+variables at that point in the code
+3. there are also now "play" and "step over"
+functions, the play allows you to finish the
+program, the stepover goes to the next line
+and executes it
+4. you can then see the new variables value
+(if any have changed)
+
+this allows you to see the variables in every
+stage without needing to add massive printf's
+in your code
+
+THIS ONLY WORKS IF YOUR PROBLEM IS IN MAIN
+
+if you want to see issues within a function
+that is written below main, on the relevant
+line in main you click the "step into" button
+which brings you down to the line where the 
+relevant function used in main is found, you
+can then use that to debug your code.
