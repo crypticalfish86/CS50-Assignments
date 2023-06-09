@@ -128,3 +128,149 @@ line in main you click the "step into" button
 which brings you down to the line where the 
 relevant function used in main is found, you
 can then use that to debug your code.
+
+ARRAYS
+
+because bytes are stored physically in memory
+they have physical attributes, and because they
+have physical attributes they can be ordered
+and have addresses we can assign to them based
+on their position in the chip, this can be
+simplified as the "memory address". 
+
+an array is a method of storing your data where
+each index is stored back-to-back in memory
+right next to each other, if you run from the 
+memory address at the beggining of the array and
+cycle through memory, each consecutive memory
+address stores the next indexed datapoint
+
+declaring an array in C looks like this
+
+int score[3];
+
+int is the type of data in the array (only one 
+type can be stored in an array)
+
+score is the array name
+
+3 is the maximum amount of indexes in the array
+(note 3 is the human number so the max length
+of the array would be score[2] because arrays
+start at 0)
+
+to pass an array into a function you would
+structure the parameter like this:
+
+void function(int arr[]);
+
+void is the return value of the function,
+int arr[] represents an array of integers
+can be passed into this function 
+(doesn't need to be called arr can be called 
+anything)
+
+a string just like in any other language is just
+an array of characters. because a string has to
+end at a certain point and because it is 
+potentially endless we need some sort of indication
+for the computer where the string ends, so a string
+is an array with an extra character right at the 
+end which looks like this : "\0" this is always
+the final character of a string. in actual binary
+the \0 the computer reads as 0, so the computer 
+knows for a string to read every character of a 
+string until it reaches a 0 which marks the end
+of a string.
+
+a string as part of an array is then an array
+inside an array (technically a 2D matrix). 
+
+in reality an array within an array doesn't
+store an entire array in a byte of memory,
+all it does it ensure that each array inside
+the super-array has its index values in order
+one after the other and then the next array
+on the next index of the super-array begins with 
+its indexes right after.
+
+you can figure out the length of a string
+with strlen("string") from the <string.h>
+library (comes with C)
+
+another useful library would be <ctype.h>
+it has many different uses, one very useful
+one would be the islower('char') which we
+can use to determine if a character is lower
+case. There is also toupper('char') that
+changes a character to its upper case version.
+
+IN A FOR LOOP YOU CAN DECLARE MULTIPLE VARIABLES
+AT THE START LIKE SO:
+
+for(int i = 0, n = 1; i < n; i++)
+{
+    code
+}
+
+just add a "," after each variable and it can get
+as long as you want.
+
+
+COMMAND LINE ARGUMENTs
+
+you can express your command line arguments all
+together with a couple modifications to a main
+
+from:
+
+int main(void)
+{
+
+}
+
+to:
+
+int main(int argc, string argv[])
+{
+
+}
+
+the void in main meant that your program took 
+no command line arguments, now it takes two
+arguments called argc, and argv.
+
+argc means argument count
+
+argv[] is an array of characters representing
+all the words that you type in your command line
+prompt
+
+
+now we can use argc and argv[] inside our actual
+main program
+
+for example:
+
+    source code:
+    int main(int argc, string argv[])
+    {
+        printf("hello, %s\n", argv[1])
+        printf("%i\n", argc)
+    }
+
+    command line:
+    ./"file_name" Jace
+
+    output:
+    hello Jace
+    2
+
+Jace being the first word in our command prompt
+after our file and 2 being the number of arguments
+we passed into our file (both the calling of the
+file with ./file_name and Jace which are two
+different arguments)
+(argv[0] would be called the file name)
+
+
