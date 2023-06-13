@@ -274,3 +274,34 @@ different arguments)
 (argv[0] would be called the file name)
 
 
+EXIT STATUS
+
+an exit status is an integer a program returns
+after it has finished running, there are various
+different errors with different exit codes
+e.g. 404 is the universal standard for "not found"
+on the internet
+
+this is why we always use int in front of
+
+int main(void){}
+
+(YOU HAVE TO WRITE THE EXIT CODE YOURSELF
+AND POTENTIALLY YOUR OWN DOCUMENTATION FOR
+WHAT EACH EXIT CODE MEANS)
+
+we can see the exit status by doing the following
+command line prompt after incorrectly running a 
+program:
+
+    echo $?
+
+this only works immediatley after a program
+is run with an error.
+
+
+CRYPTOGRAPHY
+
+there are multiple algorthms that can encrypt
+and decrypt messages, this goes back before
+computer programming existed
