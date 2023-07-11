@@ -276,3 +276,262 @@ do:
 people[2].firstName;
 
 This will give the string value "Leif"
+
+THE COMPUTATIONAL PROBLEM WITH SORTING
+
+sorting is very useful however sorting our data
+itself takes time and is a problem to solve, and
+therefore is not always the solution to a problem.
+Sorting is a computational tradeoff, if the 
+computational time needed to sort data is longer
+than the time value that it gives during search
+then it shouldn't be done.
+
+there are multiple ways to sort data that the next
+section will display
+
+SELECTION SORT
+
+Imagine an array of numbers:
+
+[7 2 4 5 1 6 0 3]
+
+this method of sorting starts at the start of the 
+array, iterates over it, each time taking note
+of the smallest number found after a full iteration
+of the array and placing that at n position, 
+switching the current number at n position
+(in the first case n being index 0) with
+the smallest found (the number currently at n
+and the smallest being swapped out actually
+change indexes regardless of how far along the
+chain the smallest number was), it will then
+begin at position n+1 and do another full iteration
+and do the same switch for the now smallest number
+from n+1 to the end of the array and again switch
+it out.
+
+e.g. with the example above [7 2 4 5 1 6 0 3]
+
+begin at 7 (current smallest 7) <-- current n
+iterate to 2 (current smallest 2)
+iterate to 4 (current smallest 2)
+iterate to 5 (current smallest 2)
+iterate to 1 (current smallest 1)
+iterate to 6 (current smallest 1)
+iterate to 0 (current smallest 0)
+iterate to 3 (current smallest 0)
+end of array switch smallest with n
+
+now array looksl like this:
+
+[0 2 4 5 1 6 7 3]
+
+n++
+begin at 2 (current smallest 2) <-- current n
+iterate to 4 (current smallest 2)
+iterate to 5 (current smallest 2)
+iterate to 1 (current smallest 1)
+iterate to 6 (current smallest 1)
+iterate to 7 (current smallest 1)
+iterate to 3 (current smallest 1)
+end of array switch smallest with n
+
+now array looks like this:
+
+[0 1 4 5 2 6 7 3]
+
+as you can see the 2 has switched positions with
+where the smallest in this iteration was previously
+
+this continues until the smallest number is at
+n = 0
+
+
+in simpler pseudocode:
+
+For i from 0 to n - 1
+    Find smallest number between numbers[i] and numbers[n-1]
+    Swap smallest number with numbers[i]
+
+this is how selection sort works
+
+The running time algorithm for this code
+is: n(n - 1)/2
+which is really : (n^2 - n)/2
+which is really n^2/2 - n/2
+
+so: 
+
+O(n^2)
+Ω(n^2)
+
+meaning: Θ(n^2) no matter what it will take n^2 
+         steps
+
+
+BUBBLE SORT
+
+bubble sorting is a different method of sorting,
+imagine the same original array again:
+
+[7 2 4 5 1 6 0 3]
+
+Bubble sorts by looking at index n, looking at
+index n + 1 and if n is larger than n + 1, they
+will switch positions
+
+e.g.
+
+look at [7 2 4 5 1 6 0 3]
+
+begin at 7 <-- current n (index 0)
+look at 2 <-- current n + 1
+7 is larger than 2 so switch positions
+[2 7 4 5 1 6 0 3]
+begin at 7 <-- current n (index 1)
+look at 4 <-- current n + 1 (index 2)
+7 is larger than 4 so switch positions
+[2 4 7 5 1 6 0 3]
+
+
+do this until you reach the end then begin 
+iterating from the beggining again but up
+to i - 2. After all of this the computer
+does one final iteration to check that 
+we have sorted properly.
+
+As you can see because 7 is the largest
+it will be present every check on the first 
+iteration, essentially, the largest elements have 
+"bubbled their way to the top".
+
+If no swaps are present on the first iteration,
+you break the loop.
+
+here is the pseudocode for bubble sort:
+
+Repeat n times
+    For i from 0 to n - 2
+        If numbers[i] > numbers[i + 1]
+            Swap numbers
+    If no swaps after entire iteration
+        Quit
+
+
+here is the running time algorithm:
+
+(n - 1) * (n - 1)
+
+meaning n^2 - 2n + 1
+
+so again: O(n^2)
+however:  Ω(n) because if no swaps quit
+
+The bubble sort can be computationally
+efficent if the data is already "almost sorted"
+
+
+this is bubble sorting
+
+both of these methods are relatively slow however
+and can be sped up using recursion.
+
+RECURSION
+
+Recursion is when a function calls itself inside
+itself, with a proper exit condition this can be
+extremely powerful. 
+
+Remember the ripping the phone book in half
+question from earlier weeks? That function was
+actually recursive:
+
+Pick up phone book
+Open to middle of phone book
+Look at page
+If person is on page
+    Call person <-- exit condition
+Else if person is earlier in book
+    Search left half of book < -- recursive
+Else if person is later in book
+    Search right half < -- recursive
+Else
+    Quit <-- exit condition
+
+
+In recursion it is ESSENTIAL to have a proper exit
+condition, when using recursion the function
+you are recursively calling must have a different
+argument each time (which is a modification of the previous floors argumentation) and the exit 
+condition must trigger when your argument reaches
+a certain value, and then in C you can just
+write "return;" which signals to the function
+that there is nothing more to do so it simply
+terminates the function.
+
+A recursive program may be confusing to look
+at, as it visually looks like you are coding
+in reverse, if your next layer is executed
+before the current layer, you would want
+your next layer to execute before the current
+layer until it reaches a certain value and then
+return up the chain, executing each layer in 
+reverse.
+
+If you're in an infinite loop press CTRL + C
+to terminate a program.
+
+
+we can use recursion now to create a better
+algorithm to sort an array
+
+MERGE SORT
+
+here is the pseudocode for merge sort:
+
+If only one number
+    Quit
+Else
+    sort left half of numbers
+    sort right half of numbers
+    merge sorted halves
+
+imagine the original array again:
+[7 2 4 5 1 6 0 3]
+
+split into two arrays so:
+
+[7 2 4 5], [1 6 0 3]
+
+sort both arrays
+
+[2 4 5 7], [0 1 3 6]
+
+also make an empty "sorted array": []
+
+compare 2 and 0 put smallest number in sorted array
+
+[2 4 5 7], [1 3 6]
+[0]
+
+move one index across array that was sorted
+compare 2 and 1 put smallest number in sorted array
+[2 4 5 7], [3 6]
+[0 1]
+
+move one index across array that was sorted,
+
+compare 2 and 3 put smallest number in sorted array
+[4 5 7], [3 6]
+[0 1 2]
+
+move one index across array that was sorted
+(this time it was the left array)
+etc. etc.
+
+you would find in this case the running time is
+
+O(n log n) instead of n^2
+
+This method does however use more memory
