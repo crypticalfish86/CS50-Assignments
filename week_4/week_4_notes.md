@@ -229,8 +229,437 @@ HI!
 I!
 !
 
-because it starts at the value its given and
-continues till it reaches \0 if you use %s in
-printf
+because s is just a pointer, it's a memory
+address so you are adding one to the address
+each time
+
+because it starts at the address of the first 
+value given and continues till it reaches \0 if 
+you use %s in printf
 
 this can be used to print a substring
+
+COMPARING STRINGS
+
+You cannot directly compare strings precisely
+because of the reasons above, a variable containing
+a string will always just contain a pointer to the
+first value and because two strings will have 
+different memory addresses two identical strings
+will always == false
+
+strcmp directly compares each char in each string
+to each other through a for loop and returns
+the result if they're the same or not.
+
+if you had two strings
+
+char *s = "HI!"
+char *t = "BYE!";
+
+and did:
+s = t;
+
+s would now actually be "BYE!"
+because while the original values of s are still
+in memory somewhere the pointer for s has been
+reassigned to the memory address of t therefore
+the computer reads s goes to t's address and just
+reads until it reaches \0.
+
+do note when copying strings like this into others
+its important t is initiated with a value otherwise
+it will throw random values when copied onto s
+and throw a segementation fault crashing your 
+program.
+
+MALLOC AND FREE
+
+in order to safely stay inside allocated memory
+and not touch any amount of memory that may be
+detrimental to your program or even your computer
+OS itself we have two functions in C that can
+allocate and disallocate memory for C programmers
+to use in their programs.
+
+Malloc works by asking you how much memory you
+want to reserve for use and then you can modify
+as much information as you want within that space
+and no other process in your computer will touch it
+(unless you accidentally touch the memory twice
+within your program in which case it will crash)
+
+
+#include <stdlib.h>
+
+char *t = malloc(4); 
+/*you have now reserved 4 bytes of memory for t
+and can now fill those bytes with char values. */
+
+
+t is now a pointer for a chunk of free space,
+malloc will return with the memory address for the
+first byte of memory you ask for UNLIKE A STRING
+IT IS NOT NULL TERMINATED SO IF YOU GO OUT OF 
+BOUNDS WITH MALLOC IT WONT STOP YOU AND YOU WILL
+CAUSE A SEGMENTATION FAULT AND YOUR PROGRAM WILL
+CRASH.
+
+malloc itself is a pointer that will be 8 bytes
+in size but it points to the first byte of t.
+
+free does the opposite of MALLOC, free takes the
+address that malloc returned and disallocates that
+memory allowing you to use that memory for other
+things (you'll want to do this otherwise that
+part of memory will stay reserved and the
+computer can't use it for anything else).
+
+all you do is add the malloc pointer inside free
+to free up all the memory space:
+
+char *t = malloc(4); 
+//memory is allocated with pointer
+free(t); 
+//memory is freed up by feeding the pointer to free
+
+STRCPY
+
+now that we know how malloc and free works we 
+can safely declare enough memory to copy strings
+and other data structures, to automate and copy 
+two strings we can use a function called strcpy()
+which is in the <string.h> library:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void)
+{
+    char *s = "hello";
+    char *t = malloc(strlen(s) + 1);
+    //we assign an extra byte to account for \0
+    
+    strcpy(t, s); //copys s and pastes it in t
+    //the destination first then the source.
+
+    if(strlen(t) > 0)
+    {
+        t[0] = toupper(t[0]);
+    }
+    /*we check to make sure t has a string before
+    modifying so we dont crash*/
+
+    printf("%s\n", t);
+    free(t); //finally we free the memory allocated
+}
+
+this should print Hello with first char capitalised
+
+NULL
+
+sometimes in order to signify an error, a variable
+will be assigned the value NULL which is actually
+a memory pointer to 0x0 which is the first byte
+of memory in a computer. This is intentionally
+assigned to variables to signify something not
+being the case.
+
+so we would modify the code above to this:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void)
+{
+    char *s = "hello";
+    char *t = malloc(strlen(s) + 1);
+    //we assign an extra byte to account for \0
+    
+        if(s == NULL || t == NULL)
+    {
+        return 1;
+    }
+    //if something has gone wrong and memory could
+    not be allocated we exit the program
+
+    strcpy(t, s); //copys s and pastes it in t
+    //the destination first then the source.
+
+    if(strlen(t) > 0)
+    {
+        t[0] = toupper(t[0]);
+    }
+    /*we check to make sure t has a string before
+    modifying so we dont crash*/
+
+    printf("%s\n", t);
+    free(t); //finally we free the memory allocated
+}
+
+remember when using malloc, always free the memory
+
+CREATING ARRAYS OF DIFFERENT DATATYPES
+
+if we want to create an array manually we will
+use malloc and also we can use the sizeof
+function from <stdlib.h> to ensure we assign
+enough memory, here we create an array of ints:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *x = malloc(3 * sizeof(int));
+    x[0] = 72;
+    x[1] = 73;
+    x[2] = 74;
+    return 1;
+}
+
+here we multiply the size of an integer by 3
+so that the array has enough space for 3 integers
+
+note we do not ever free this memory up, this 
+causes a "memory leak" which is a bug where memory 
+is not freed up after it has been allocated, there 
+are countless bugs like this in software and there 
+needs to be special software to detect them
+
+VALGRIND
+
+valgrind is a piece of software specifically made
+to detect memory leaks.
+
+In order to initiate valgrind you simply do:
+
+valgrind ./program_name
+
+valgrind is a bit esoteric to read, however it will
+tell you when you missallocate memory without 
+freeing the memory afterwards, how much memory is 
+still allocated and tell you which line the bug is 
+on.
+
+Memory Leaks are very damaging bugs if they happen
+over and over and so its important to fix them
+when they appear.
+
+
+MULTIPLE POINTERS TO THE SAME ADDRESS
+
+Multiple pointers can be created to the same 
+address:
+
+int main(void)
+{
+    int *x = 42;
+    int *y;
+    y = x; //y now points to the same place as x
+    *y = 13; 
+    //the value at address y and x has now been 
+    changed to 13
+    printf("%i", *x); //this now prints 13
+}
+
+when assigning multiple pointers to the same value,
+if you were to use one pointer to change the value
+of the destination of the pointer, the *value
+of all pointers now has also changed to what you 
+changed that one pointers *value to.
+
+SWAP (AND AFFECTING VALUES OUTSIDE OF THE LOCAL 
+SCOPE OF A FUNCTION)
+
+you've done this before but take these two 
+variables:
+
+int x = 13;
+int y = 42;
+
+if you want to swap these two variables so x 
+equals 42 and y = 13 you will need a temporary 
+variable in between (a relay variable as you have 
+previously called it):
+
+int relayValue = x;
+x = y;
+y = relayValue;
+
+relayValue was needed to temporarily preserve
+the original value of x and then apply it to y
+after x is assigned the value of y.
+
+however if we wanted to do this inside a local
+function:
+
+int main(void)
+{
+    int x = 13;
+    int y = 42;
+    swap(x, y);
+    printf("%i\n%i\n", x, y);
+}
+
+void swap(int x, int y)
+{
+    int relayValue = x;
+    x = y;
+    y = relayValue;
+}
+
+THIS WILL NOT WORK and this is because when you 
+put arguments into a function they are actually
+creating copies of those values, as in generating
+new memory addresses and assigning them to 
+variables.
+
+if we actually wanted to modify the variables
+we would actually have to feed the pointers
+of the variables into the function instead:
+
+int main(void)
+{
+    int *x = 13;
+    int *y = 42;
+    swap(&x, &y); //we now pass addresses in
+    printf("%i\n%i\n", x, y");
+}
+
+/*we initialise instead of an integer but a 
+pointer to an integer as parameters of a function*/
+
+void swap(int *x, int *y) 
+{
+    int relayValue = *x; 
+    //value of pointer assigned to relay Value
+    *x = *y;
+    /*value of pointer y assigned to value of 
+    pointer x/*
+    *y = relayValue;
+    //value of relay value assigned to value of 
+    pointer y
+}
+
+now that we have passed the pointers in, it has 
+taken the memory addresses themselves and 
+reassigned the values at those addresses, you 
+cannot make a copy of a memory address and 
+therefore the values outside of the function
+are altered too. (note the function is technically 
+creating a copy of a pointer still but its a 
+pointer to the same address as the one outside of 
+the function and so just like how if multiple 
+pointers are assigned to the same address and 
+theres a modification with one then there will be 
+a modification with all of them).
+
+SCANF
+
+scanf is a function in <stdin.h> which gets a user
+input via the console and assigns it to a variable
+
+#include <stdio.h>
+#include <stdin.h>
+
+int main(void)
+{
+    int x;
+    printf("input integer value:");
+    //prompting on console for user to input value
+    scanf("%i", &x);
+    //program will now wait for a user input
+    printf("%i", x);
+}
+
+you put the %i in like in printf in scanf to
+indicate you want to assign an integer,
+and you are putting in a memory address
+because remember in the previous example
+it would otherwise create a copy of the variable.
+
+if you don't type in an actual integer like shown,
+scanf will default the value to 0;
+
+MANIPULATING FILES
+
+now that we have access to memory addresses we can
+manipulate files outside of our program.
+
+here we have a few more functions and a new 
+datatype.
+
+first a new datatype FILE which is the datatype
+which is a pointer for the first byte of a file
+in computer memory.
+
+then there is fopen which returns the first byte
+of a file in computer memory, connecting these two
+you can do this:
+
+FILE *file = fopen("file.csv", "a");
+
+this assigns the first byte of a file as the value
+to the variable file. note the second arguement in 
+fopen is "a". This second argument is telling 
+fopen what you intend to do to the file and so
+preps the file for futher modification in your code
+there is more than one letter here are all of them:
+
+"r" opens a file just for reading (file MUST exist)
+
+"w" creates an empty file for writing (if a file
+with the same name already exists that file is 
+erased and a new file is created in its place)
+
+"a" Appends to a file. writing operations, appends 
+data at the end of the file. the file is created 
+if it doesn't exist.
+
+"r+" opens a file to update both reading and writing to the file. the file must exist.
+
+"w+" creates an empty file for both reading and 
+writing to the file.
+
+"a+" opens a file for reading and appending.
+
+then there is another new function called fprintf,
+fprintf essentially writes to a file and depending
+on how the file is opened using fopen it will do it
+in different ways:
+
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+
+int main(void)
+{
+    FILE *file = fopen("phonebook.csv", "a");
+
+    string name = get_string("Name: ");
+    string number = get_string("Number: ");
+
+    fprintf(file, "%s%s\n", name, number)
+
+    fclose(file);
+}
+
+because fopen was initialized with "a" fprintf will
+append name and number to the end of the existing 
+csv file,
+
+if we had instead used "w" it would delete any file
+called phonebook.csv and create an empty file and
+write the name and number there
+
+if we initalised it with "r" it would throw us an 
+error because we are not authorised to edit the 
+file just read its contents
+
+finally fclose, closes the file and frees up memory
+always close a file in a program at the end of your
+program otherwise it will stay open which can cause
+bugs.
