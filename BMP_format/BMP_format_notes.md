@@ -111,9 +111,145 @@ arrays start at 0).
 
 BMP METADATA
 
+First things first here is what the 14 byte 
+BITMAPFILEHEADER
+struct looks like:
 
+typedef struct
+{
+    WORD bfType;
+    DWORD bfSize;
+    WORD bfReserved1;
+    WORD bfReserved2;
+    DWORD bfOffBits;
+}
+BITMAPFILEHEADER;
+
+WORD AND DWORD are both primitives,
+
+WORD is a 16bit unsigned integer value ranging 
+from values of 0 to 65,535, it is unsigned meaning 
+it cannot represent negative numbers
+
+DWORD (or "double WORD") is a 32bit unsigned 
+integer value ranging from values of 0 to 4,294,
+967,295, it is unsigned meaning it cannot 
+represent negative numbers
+
+bfType determines the "type" of the file (being
+always in this case BMP)
+
+bfSize represents the size in bytes of the bmp
+files (including the metadata)
+
+bfReserved1 and bfReserved2 are always the value 
+of 0
+
+bfOffBits is the offset in bytes from the 
+beggining of BITMAPFILEHEADER struct to the actual 
+bitmap (how many bytes after this struct the 
+actual bitmap begins which in this case will be 40 
+more bytes because of the next struct).
+
+next we have BITMAPINFOHEADER
+
+typedef struct
+{
+    DWORD  biSize;
+    LONG   biWidth;
+    LONG   biHeight;
+    WORD   biPlanes;
+    WORD   biBitCount;
+    DWORD  biCompression;
+    DWORD  biSizeImage;
+    LONG   biXPelsPerMeter;
+    LONG   biYPelsPerMeter;
+    DWORD  biClrUsed;
+    DWORD  biClrImportant;
+}
+BITMAPINFOHEADER;
+
+biSize is the number of bytes of the struct
+
+biWidth is the width of the bitmap, in pixels (not 
+bytes, but pixels remember each pixel takes up 3 
+bytes)
+
+biHeight is the height of the bitmap in pixels, if 
+biHeight is positive, the bitmap is a bottom-up 
+DIB and its origin is the lower-left corner. if 
+biHeight is negative the bitmap is a topdown DIB 
+and its origin the the upper-left corner.
+
+biPlanes is the number of planes for the target 
+device (must always be 1)
+
+biBitCount is the number of bits per pixel, this 
+number determines the number of bits that define 
+each pixel, given we are using the RGB format this 
+number will be 24 in this case.
+
+biCompression is the type of compression for a 
+compressed bottom-up bitmap (dont need to worry 
+about this)
+
+biSizeImage is the size in bytes of the image 
+(note not the pixels but the total size of just 
+the image not the metadata)
+
+biXPelsPerMeter is the horizontal resolution in 
+pixels per meter of the device the image is 
+displayed on
+
+biYpelsPerMeter is the vertical resolution in 
+pixels per meter of the device the image is 
+displayed on
+
+biClrUsed is the number of color indexes in the 
+color table that are actually used by the bitmap, 
+if the value is 0 the bitmap uses the maximum 
+number of colors corresponding to the value of 
+biBitCount member for the compression mode 
+specified by biCompression.
+
+biClrImportant is the number of color indexes that 
+are required for displaying the bitmap. if the 
+value is zero, all colors are required.
+
+
+RGBTRIPLE
+
+and of course there are the pixels in this actual
+image which are represented by rgb triple which
+is a 3byte struct each primitive value having 256 
+variations explained above in this document
+
+typedef struct
+{
+    BYTE  rgbtBlue;
+    BYTE  rgbtGreen;
+    BYTE  rgbtRed;
+}
+RGBTRIPLE;
+
+BYTE as a datastructure is just an unsigned byte 
+as the name suggests ranging from values between 0 
+and 255
 
 IMAGE FILTERING(GRAYSCALE)
+
+if a pixels red green and blue values all have a 
+value of 0x00 the pixel is white, if they have all 
+values set to 0xff, the pixel is white, so long as 
+all of the pixels red, green and blue values are 
+all equal then the pixel will be varying shades of 
+grey.
+
+to convert a pixel to grayscale we just need to 
+make sure the red, green and blue values are all 
+the same value, we do this by taking the average 
+of the red green and blue values and apply that 
+value to red green and blue to make the new pixel
 
 IMAGE FILTERING(REFLECTION)
 
