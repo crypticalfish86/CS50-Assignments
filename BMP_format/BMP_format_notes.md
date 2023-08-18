@@ -253,6 +253,10 @@ value to red green and blue to make the new pixel
 
 IMAGE FILTERING(REFLECTION)
 
+
+
 IMAGE FILTERING(BLUR)
+
+
 
 IMAGE FILTERING (EDGES)
